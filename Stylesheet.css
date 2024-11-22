@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #444;
+    padding: 10px 0;
+}
+
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+
+nav a:hover {
+    background-color: #555;
+}
+
+
+main {
+    padding: 20px;
+}
+
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.Editors-Suggestions {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.Editors-Suggestions li {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* News ticker styles */
+/* 新闻滚动条样式 */
+.news-ticker {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .news-ticker ul {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    animation: scroll 10s linear infinite;
+  }
+  
+  .news-ticker li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+
+
