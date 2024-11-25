@@ -9,4 +9,4 @@ function scrollNews() {
   newsTicker.style.transform = `translateX(-${currentIndex * newsItemWidth}px)`;
 }
 
-setInterval(scrollNews, 10000); // 每2秒滚动一次
+setInterval(scrollNews, 10000); // 每10秒滚动一次 // Scroll every 10 seconds
