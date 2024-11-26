@@ -64,23 +64,33 @@ footer {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* News ticker styles */
 /* 新闻滚动条样式 */
+/* News ticker styles */
 .news-ticker {
   display: flex;
   overflow: hidden;
+  white-space: nowrap;
+}
+
+.news-ticker ul {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  animation: scroll 10s linear infinite;
 }
 
 .news-ticker li {
   flex: 0 0 auto;
-  width: 300px; /* 根据需要调整按钮宽度 */
-  display: flex;
+  width: auto;
+  display: inline-block;
   align-items: center;
   justify-content: center;
+  margin-right: 20px;
 }
 
 .news-ticker img {
-  width: 100px; /* 根据需要调整图片宽度 */
+  width: 100px; /* 图片宽度 */
   height: auto;
   margin-right: 10px;
 }
@@ -95,5 +105,46 @@ footer {
     }
   }
   
+/* 表格样式 */
+/* Table Style */
+#data-table {
+  margin: 0 auto;
+  display: table;
+  width: 80%;
+  border-collapse: collapse;
+}
+
+/* 字体大小 */
+/* Font Size */
+#data-table th,
+#data-table td {
+  font-size: 1.2em;
+}
+
+/* 边框 */
+/* Border */
+#data-table,
+#data-table th,
+#data-table td {
+  border: 2px solid black;
+}
+
+/* 设置表头和单元格的填充 */
+/* Set padding for table header and cells */
+#data-table th,
+#data-table td {
+  padding: 8px; /* 填充大小 */
+  text-align: left; /* 文本对齐 */
+}
+
+/*删除按钮 */
+/* Delete Button */
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
 
 

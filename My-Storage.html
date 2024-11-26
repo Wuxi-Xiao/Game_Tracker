@@ -1,43 +1,123 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jack's Game Tracker</title>
     <link rel="stylesheet" href="../Stylesheet/Stylesheet.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
+
 <body>
     <header>
-        <h1>[Placeholder]</h1>
+        <h1>Games List</h1>
     </header>
+
     <nav>
-        <a href="Home.html">[Home]</a>
-        <a href="#">[My storage]</a>
-        <a href="#">[Tracking]</a>
-        <a href="#">Copyright</a>
+        <a href="Home.html">Home</a>
+        <a href="#">My storage</a>
+        <a href="News.html">News</a>
+        <a href="Copyright-information.html">Copyright</a>
     </nav>
+
     <main>
-        
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Platform</th>
+            <th>Release Time</th>
+            <!-- 根据需要添加更多列 -->
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- Firestore数据将在这里显示 -->
+        </tbody>
+
+      </table>
     </main>
+
     <footer>
         <p>Copyright &copy; 2024-2024 Wuxi_Xiao</p>
         <p>All images and names used in this website are protected by copyright and belong to their respective copyright owners.</p>
     </footer>
 
-    <!--注册sw.js-->
-    <!--Register sw.js-->
-    <script>
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('../sw.js')
-              .then(registration => {
-                console.log('Service Worker registered with scope:', registration.scope);
-              })
-              .catch(error => {
-                console.error('Service Worker registration failed:', error);
-              });
-          });
-        }
-      </script>
+    <script type="module">
+    // 导入 Firebase 模块
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+    import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+    
+    // Firebase 配置
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAM67yl9v7Vt5bTh3Xoc275AGlHM2UUOy0",
+      authDomain: "game-tracker-wuxi.firebaseapp.com",
+      projectId: "game-tracker-wuxi",
+      storageBucket: "game-tracker-wuxi.firebasestorage.app",
+      messagingSenderId: "485365006837",
+      appId: "1:485365006837:web:6fa8b042d78937cdf320bc",
+      measurementId: "G-BSPW6LM45X",
+    };
+    
+    // 初始化 Firebase
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    
+    // 初始化 Analytics 和 Firestore
+    // Initialize Analytics and Firestore
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+    
+    // 从 Firestore 获取集合数据
+    // Fetch data from Firestore collection
+    const gamesCollection = collection(db, "Games");
+    onSnapshot(gamesCollection, (snapshot) => {
+      const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = ''; // 清空表格内容
+      
+      // 遍历文档快照
+      // Iterate through document snapshots
+      snapshot.forEach((doc) => {
+        const row = tableBody.insertRow();
+        
+        // 添加单元格
+        // Add cells
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+        const cell4 = row.insertCell(3);
+        
+        // 设置单元格内容
+        // Set cell content
+        cell1.textContent = doc.data().Name;
+        cell2.textContent = doc.data().Platform;
+        cell3.textContent = doc.data().Release_Time;
+        cell4.innerHTML = `<button id="delete-btn-${doc.id}">Delete</button>`;
+      });
+    });
+    
+    // 获取所有删除按钮
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+    
+    // 为每个删除按钮添加点击事件监听器
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // 获取按钮的ID，即文档的ID
+        const docId = button.id.replace('delete-btn-', '');
+        
+        // 从Firestore中删除对应的文档
+        db.collection('Games').doc(docId).delete().then(() => {
+          console.log('Document successfully deleted!');
+        }).catch((error) => {
+          console.error('Error removing document: ', error);
+        });
+      });
+    });
+    </script>
+      
 </body>
 </html>

@@ -1,0 +1,53 @@
+// 初始化 Firebase 应用
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+firebase.initializeApp(firebaseConfig);
+
+<script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+        const firebaseConfig = {
+          apiKey: "AIzaSyAM67yl9v7Vt5bTh3Xoc275AGlHM2UUOy0",
+          authDomain: "game-tracker-wuxi.firebaseapp.com",
+          projectId: "game-tracker-wuxi",
+          storageBucket: "game-tracker-wuxi.firebasestorage.app",
+          messagingSenderId: "485365006837",
+          appId: "1:485365006837:web:6fa8b042d78937cdf320bc",
+          measurementId: "G-BSPW6LM45X"
+        };
+        
+        // 初始化 Firebase
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = firebase.firestore();
+
+        // 获取Firestore集合数据
+        db.collection("Games").onSnapshot((snapshot) => {
+          const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+          tableBody.innerHTML = ''; // 清空表格内容
+          
+          snapshot.forEach((doc) => {
+            const row = tableBody.insertRow();
+            
+            // 添加单元格
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            
+            // 设置单元格内容
+            cell1.textContent = doc.data().Name;
+            cell2.textContent = doc.data().Platform;
+            cell3.textContent = doc.data().Release_Time;
+            
+            // 根据需要添加更多单元格
+            });
+          });
+      </script>
